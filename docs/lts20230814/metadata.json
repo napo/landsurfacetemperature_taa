@@ -1,0 +1,16 @@
+{
+"name": "lts20230814",
+"description": "lts20230814",
+"version": "2",
+"minzoom": "0",
+"maxzoom": "15",
+"center": "10.596313,45.878536,15",
+"bounds": "10.400660,45.673478,12.477429,47.091563",
+"antimeridian_adjusted_bounds": "10.400660,45.673478,12.477429,47.091563",
+"type": "overlay",
+"strategies": "[{\"tiny_polygons\":509217},{\"tiny_polygons\":509217},{\"tiny_polygons\":509217},{\"tiny_polygons\":509152},{\"coalesced_as_needed\":233527,\"tiny_polygons\":274781,\"tile_size_desired\":616677},{\"coalesced_as_needed\":607948,\"tiny_polygons\":46617,\"tile_size_desired\":1462599},{\"coalesced_as_needed\":578033,\"tiny_polygons\":4177,\"tile_size_desired\":3767961},{\"coalesced_as_needed\":551453,\"tiny_polygons\":592,\"tile_size_desired\":8005073},{\"coalesced_as_needed\":545796,\"tiny_polygons\":15,\"tile_size_desired\":8952073,\"feature_count_desired\":257497},{\"coalesced_as_needed\":546453,\"tiny_polygons\":13,\"tile_size_desired\":4850009},{\"coalesced_as_needed\":472100,\"tiny_polygons\":102,\"tile_size_desired\":1407943},{\"tiny_polygons\":325},{\"tiny_polygons\":431},{\"tiny_polygons\":830},{\"tiny_polygons\":1916},{\"tiny_polygons\":5825}]",
+"format": "pbf",
+"generator": "tippecanoe v2.29.0",
+"generator_options": "tippecanoe -pC -z15 -e lts20230814 --force --coalesce-densest-as-needed --extend-zooms-if-still-dropping temperatura.geojson",
+"json": "{\"vector_layers\":[{\"id\":\"temperatura\",\"description\":\"\",\"minzoom\":0,\"maxzoom\":15,\"fields\":{\"DN\":\"Number\",\"celsius\":\"Number\",\"fid\":\"Number\"}}],\"tilestats\":{\"layerCount\":1,\"layers\":[{\"layer\":\"temperatura\",\"count\":509217,\"geometry\":\"Polygon\",\"attributeCount\":3,\"attributes\":[{\"attribute\":\"DN\",\"count\":41,\"type\":\"number\",\"values\":[274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314],\"min\":274,\"max\":314},{\"attribute\":\"celsius\",\"count\":41,\"type\":\"number\",\"values\":[1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,5,6,7,8,9],\"min\":1,\"max\":41},{\"attribute\":\"fid\",\"count\":1000,\"type\":\"number\",\"values\":[1,10,100,1000,10000,100000,100001,100002,100003,100004,100005,100006,100007,100008,100009,10001,100010,100011,100012,100013,100014,100015,100016,100017,100018,100019,10002,100020,100021,100022,100023,100024,100025,100026,100027,100028,100029,10003,100030,100031,100032,100033,100034,100035,100036,100037,100038,100039,10004,100040,100041,100042,100043,100044,100045,100046,100047,100048,100049,10005,100050,100051,100052,100053,100054,100055,100056,100057,100058,100059,10006,100060,100061,100062,100063,100064,100065,100066,100067,100068,100069,10007,100070,100071,100072,100073,100074,100075,100076,100077,100078,100079,10008,100080,100081,100082,100083,100084,100085,100086],\"min\":1,\"max\":537794}]}]}}"
+}
