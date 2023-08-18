@@ -1,3 +1,107 @@
+const colorArray = {
+	"-50":"#30123b",
+	"-49":"#341a4e",
+	"-48":"#362160",
+	"-47":"#392971",
+	"-46":"#3b3081",
+	"-45":"#3e3790",
+	"-44":"#3f3f9e",
+	"-43":"#4146ac",
+	"-42":"#424cb7",
+	"-41":"#4454c3",
+	"-40":"#455bcd",
+	"-39":"#4661d7",
+	"-38":"#4668df",
+	"-37":"#476fe7",
+	"-36":"#4776ee",
+	"-35":"#477cf3",
+	"-34":"#4682f8",
+	"-33":"#4589fc",
+	"-32":"#448ffe",
+	"-31":"#4195ff",
+	"-30":"#3e9cfe",
+	"-29":"#3aa2fc",
+	"-28":"#36a9f9",
+	"-27":"#31aff5",
+	"-26":"#2db5f1",
+	"-25":"#28bceb",
+	"-24":"#24c2e5",
+	"-23":"#20c7df",
+	"-22":"#1dccd9",
+	"-21":"#1ad2d2",
+	"-20":"#18d7cb",
+	"-19":"#18dcc4",
+	"-18":"#18e0bd",
+	"-17":"#19e3b8",
+	"-16":"#1de7b2",
+	"-15":"#21ebab",
+	"-14":"#27eea4",
+	"-13":"#2ef19c",
+	"-12":"#36f393",
+	"-11":"#3ff68b",
+	"-10":"#48f882",
+	"-9":"#52fa7a",
+	"-8":"#5bfc71",
+	"-7":"#65fd69",
+	"-6":"#70fe60",
+	"-5":"#7afe58",
+	"-4":"#83ff51",
+	"-3":"#8cff4a",
+	"-2":"#96fe44",
+	"-1":"#9dfe40",
+	"0":"#a4fc3c",
+	"1":"#abfb38",
+	"2":"#b1f936",
+	"3":"#b8f635",
+	"4":"#bff434",
+	"5":"#c5f034",
+	"6":"#cced34",
+	"7":"#d2e935",
+	"8":"#d8e535",
+	"9":"#dde037",
+	"10":"#e2dc38",
+	"11":"#e7d739",
+	"12":"#ecd23a",
+	"13":"#f0cc3a",
+	"14":"#f4c73a",
+	"15":"#f6c23a",
+	"16":"#f9bc39",
+	"17":"#fbb737",
+	"18":"#fcb136",
+	"19":"#feaa33",
+	"20":"#fea331",
+	"21":"#fe9c2d",
+	"22":"#fe952b",
+	"23":"#fd8d27",
+	"24":"#fc8624",
+	"25":"#fb7e21",
+	"26":"#f9761d",
+	"27":"#f76f1a",
+	"28":"#f46717",
+	"29":"#f25f14",
+	"30":"#ef5911",
+	"31":"#ec520f",
+	"32":"#e84b0c",
+	"33":"#e5460b",
+	"34":"#e14109",
+	"35":"#dc3c07",
+	"36":"#d83706",
+	"37":"#d33205",
+	"38":"#cd2c04",
+	"39":"#c82803",
+	"40":"#c22403",
+	"41":"#bc2002",
+	"42":"#b51c01",
+	"43":"#af1801",
+	"44":"#a81501",
+	"45":"#a01201",
+	"46":"#990e01",
+	"47":"#910b01",
+	"48":"#880802",
+	"49":"#800602",
+	"50":"#7a0403"
+  };
+
 var vectorTileStyling = {
 	temperatura: {
 		weight: 0,
@@ -7,17 +111,10 @@ var vectorTileStyling = {
 	},
 	temperatura: function(properties, zoom) {
     	var w = properties.celsius;
-		const colorArray = [
-			"#30123b", "#372568", "#3d368e", "#4248b0", "#4559cb", "#4669e1", "#4779f1", "#4589fc", "#4099ff", "#37a9fa",
-			"#2bb8ef", "#21c6e0", "#1ad4d0", "#18debf", "#1ee8b1", "#2bf09f", "#3ff68a", "#56fa76", "#6ffe61", "#87ff4f",
-			"#9cfe40", "#acfb38", "#bdf534", "#ccec34", "#dbe236", "#e7d739", "#f1ca3a", "#f9bd39", "#fdaf35", "#fe9e2f",
-			"#fd8c27", "#f9791e", "#f46717", "#ed5510", "#e5460b", "#db3a07", "#ce2d04", "#c12302", "#9f1101", "#8c0902",
-			"##7a0403"
-		  ];
     	rstyle = {
- 	    	color: colorArray[w-1],
+ 	    	color: colorArray[w.toString()],
             weight: 0,
-			fillColor: colorArray[w-1],
+			fillColor: colorArray[w.toString()],
 			fillOpacity: 0.6,
 			fill: true
     	}
@@ -34,81 +131,60 @@ var map = L.map('map',
 	});
 
 
+var osmAttribution = 'map data © <a href="http://osm.org/copyright">OpenStreetMap contributors</a> under ODbL';
 
-var cartodbAttribution = 'map data © <a href="http://osm.org/copyright">OpenStreetMap contributors</a> under ODbL';
-
-var positron = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		attribution: cartodbAttribution,
+var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: osmAttribution,
 		//opacity: 1
 }).addTo(map);
 
-//var sidewalksUrl = "https://tavolare.labmod.org/www/sidewalks/{z}/{x}/{y}.pbf";
-var sidewalksUrl = "lts20230814/{z}/{x}/{y}.pbf";
+var ltsUrl = "lts20230814/{z}/{x}/{y}.pbf";
 
-var sidewalksOps = {
+var ltsOps = {
 	rendererFactory: L.canvas.tile,
 	attribution: 'data elaborated from <a href="https://dati.gov.it">NASA ECOSTREESS</a>',
 	vectorTileLayerStyles: vectorTileStyling,
-	interactive: false
+	interactive: true
 	};
-	
-var sidewalksLayer = L.vectorGrid.protobuf(sidewalksUrl, sidewalksOps).addTo(map);
+
+var ltsLayer = L.vectorGrid.protobuf(ltsUrl, ltsOps).addTo(map);
 
 var popup = new L.popup({
-      closeButton: false,
-      closeOnClick: false
+	closeButton: false,
+	closeOnClick: false
 });
 
 function addPopup(e) {
-	var lineWidth = -1;
+	temp = -1
 	if (e.layer.feature) {
 		var prop = e.layer.feature.properties;
-		lineWidth = prop.celsius;
+		temp = prop.celsius;
 	} else {
 		var prop = e.layer.properties;
-		lineWidth = prop.celsius;
+		temp = prop.celsius;
 	}
-    var lineColor = '#8c0902'; 
-    var coordinates = e.lngLat;
-
-    if (lineWidth <= 2  ) {
-    	var message = 'Questo tratto è troppo stretto per il distanziamento sociale'
-        var lineColor = '#ed4347'  //sys red
-    } else if (lineWidth > 2 && lineWidth <= 3) {
-        var message = 'Questo tratto è troppo stretto per il distanziamento sociale'
-        var lineColor = '#ed4347' //sys red	
-	} else if (lineWidth > 3 && lineWidth <= 4) {
-        var message = 'Il distanziamento sociale in questo tratto è difficile.'
-        var lineColor = '#d6e52e' //'#ff9848' yellow
-    } else if (lineWidth > 4 && lineWidth <= 6) {
-        var message = 'Il distanziamento sociale è possibile in questo tratto.'
-        var lineColor = '#41ce69' //green
-	} else {
-        var message = 'Il distanziamento sociale dovrebbe essere possibile in questo tratto.'
-        var lineColor = '#0875f9'  //blue
-      }
-	
-	  	w = (Math.round(lineWidth * 10) / 10).toString().replace(".", ",");   
-     	 var description = 
-        '<div class="name1">Larghezza</div>' +
-        '<div class="width">' + w + 'm</div>' +
-         '<hr style="border: 2px solid ' + lineColor + ' ;"/>' +
-        '<div class="message">' + message + '</div>'
-		popup.setLatLng(e.latlng)
-      	popup.setContent(description)
-      	popup.addTo(map)
- }
+  	var lineColor = colorArray[temp.toString()]; 
+  	var coordinates = e.lngLat;
+  
+	var description = 
+	  '<div class="name1">Temperatura</div>' +
+	  '<div class="width">' + temp + ' gradi</div>' +
+	   '<hr style="border: 3px solid ' + lineColor + ' ;"/>'
+	popup.setLatLng(e.latlng)
+	popup.setContent(description)
+	popup.addTo(map)
+}
 
 
 var lastZoom;
 map.on('zoomend', function() {
   var zoom = map.getZoom();
-  if (zoom >= 10) {
-	sidewalksLayer.on('mouseover', function(e) {
+  if (zoom >= 15) {
+	ltsLayer.on('mouseover', function(e) {
 		addPopup(e);
 	});
   } else {
-	sidewalksLayer.on('mouseover', function(e) {
+	ltsLayer.on('mouseover', function(e) {
 		//popup.remove()
 		return;
 	});
@@ -117,13 +193,8 @@ map.on('zoomend', function() {
 })
 
 
-var redStyle = {
-  "color": "c4c4c4",
-  "weight": 4,
-  "fillOpacity": 0
-};
+
 italy  = [46.2312,11.62356]
 map.setView(italy, 9);
 var hash = new L.Hash(map);
 new L.Control.Zoom({ position: 'topright' }).addTo(map);
-

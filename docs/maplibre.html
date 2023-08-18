@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Land Surface Temperature 18/08/2023</title>
+    <meta property="og:description" content="Add a third-party raster source to the map." />
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.css' />
+    <script src='https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.js'></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        html, body, #map { height: 100%; }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    const map = new maplibregl.Map({
+        container: 'map', // container id
+        style: {
+            'version': 8,
+            'sources': {
+                'raster-tiles': {
+                    'type': 'raster',
+                    'tiles': [
+                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+                    ],
+                    'tileSize': 256,
+                    'attribution':
+                        'Map tiles by <a target="_top" rel="noopener" href="http://stamen.com">Stamen Design</a>, under <a target="_top" rel="noopener" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" rel="noopener" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" rel="noopener" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>'
+                }
+            },
+            'layers': [
+                {
+                    'id': 'simple-tiles',
+                    'type': 'raster',
+                    'source': 'raster-tiles',
+                    'minzoom': 0,
+                    'maxzoom': 16
+                }
+            ]
+        },
+        center: [11.62356,46.2312], // starting position
+        zoom: 7, // starting zoom,
+        hash: true
+    });
+    const colorArray = [
+			"#30123b", "#372568", "#3d368e", "#4248b0", "#4559cb", "#4669e1", "#4779f1", "#4589fc", "#4099ff", "#37a9fa",
+			"#2bb8ef", "#21c6e0", "#1ad4d0", "#18debf", "#1ee8b1", "#2bf09f", "#3ff68a", "#56fa76", "#6ffe61", "#87ff4f",
+			"#9cfe40", "#acfb38", "#bdf534", "#ccec34", "#dbe236", "#e7d739", "#f1ca3a", "#f9bd39", "#fdaf35", "#fe9e2f",
+			"#fd8c27", "#f9791e", "#f46717", "#ed5510", "#e5460b", "#db3a07", "#ce2d04", "#c12302", "#9f1101", "#8c0902",
+			"#7a0403"
+		  ];
+    map.on('load', () => {
+        map.addSource('lts20230814', {
+            type: 'vector',
+            tiles: [
+                'http://localhost:8000/lts20230814/{z}/{x}/{y}.pbf']
+        });
+        map.addLayer({
+            'id': 'lts20230814',
+            'type': 'fill',
+            'source': 'lts20230814',
+            'source-layer': 'temperatura', 
+            'paint': {
+            'fill-color': [
+                'step',
+                ['get', 'celsius'],
+                    "#30123b": "-50",
+                    "#341a4e": "-49",
+                    "#362160": "-48",
+                    "#392971": "-47",
+                    "#3b3081": "-46",
+                    "#3e3790": "-45",
+                    "#3f3f9e": "-44",
+                    "#4146ac": "-43",
+                    "#424cb7": "-42",
+                    "#4454c3": "-41",
+                    "#455bcd": "-40",
+                    "#4661d7": "-39",
+                    "#4668df": "-38",
+                    "#476fe7": "-37",
+                    "#4776ee": "-36",
+                    "#477cf3": "-35",
+                    "#4682f8": "-34",
+                    "#4589fc": "-33",
+                    "#448ffe": "-32",
+                    "#4195ff": "-31",
+                    "#3e9cfe": "-30",
+                    "#3aa2fc": "-29",
+                    "#36a9f9": "-28",
+                    "#31aff5": "-27",
+                    "#2db5f1": "-26",
+                    "#28bceb": "-25",
+                    "#24c2e5": "-24",
+                    "#20c7df": "-23",
+                    "#1dccd9": "-22",
+                    "#1ad2d2": "-21",
+                    "#18d7cb": "-20",
+                    "#18dcc4": "-19",
+                    "#18e0bd": "-18",
+                    "#19e3b8": "-17",
+                    "#1de7b2": "-16",
+                    "#21ebab": "-15",
+                    "#27eea4": "-14",
+                    "#2ef19c": "-13",
+                    "#36f393": "-12",
+                    "#3ff68b": "-11",
+                    "#48f882": "-10",
+                    "#52fa7a": "-9",
+                    "#5bfc71": "-8",
+                    "#65fd69": "-7",
+                    "#70fe60": "-6",
+                    "#7afe58": "-5",
+                    "#83ff51": "-4",
+                    "#8cff4a": "-3",
+                    "#96fe44": "-2",
+                    "#9dfe40": "-1",
+                    "#a4fc3c": "0",
+                    "#abfb38": "1",
+                    "#b1f936": "2",
+                    "#b8f635": "3",
+                    "#bff434": "4",
+                    "#c5f034": "5",
+                    "#cced34": "6",
+                    "#d2e935": "7",
+                    "#d8e535": "8",
+                    "#dde037": "9",
+                    "#e2dc38": "10",
+                    "#e7d739": "11",
+                    "#ecd23a": "12",
+                    "#f0cc3a": "13",
+                    "#f4c73a": "14",
+                    "#f6c23a": "15",
+                    "#f9bc39": "16",
+                    "#fbb737": "17",
+                    "#fcb136": "18",
+                    "#feaa33": "19",
+                    "#fea331": "20",
+                    "#fe9c2d": "21",
+                    "#fe952b": "22",
+                    "#fd8d27": "23",
+                    "#fc8624": "24",
+                    "#fb7e21": "25",
+                    "#f9761d": "26",
+                    "#f76f1a": "27",
+                    "#f46717": "28",
+                    "#f25f14": "29",
+                    "#ef5911": "30",
+                    "#ec520f": "31",
+                    "#e84b0c": "32",
+                    "#e5460b": "33",
+                    "#e14109": "34",
+                    "#dc3c07": "35",
+                    "#d83706": "36",
+                    "#d33205": "37",
+                    "#cd2c04": "38",
+                    "#c82803": "39",
+                    "#c22403": "40",
+                    "#bc2002": "41",
+                    "#b51c01": "42",
+                    "#af1801": "43",
+                    "#a81501": "44",
+                    "#a01201": "45",
+                    "#990e01": "46",
+                    "#910b01": "47",
+                    "#880802": "48",
+                    "#800602": "49",
+                    "#7a0403"
+                ],
+                'fill-opacity': 0.6
+            },
+        });
+    });
+    map.addControl(new maplibregl.NavigationControl());
+</script>
+</body>
+</html>
