@@ -106,7 +106,7 @@ var vectorTileStyling = {
 	temperatura: {
 		weight: 0,
 		fillColor: 'white',
-		fillOpacity: 0.6,
+		fillOpacity: 0.8,
 		fill: true
 	},
 	temperatura: function(properties, zoom) {
@@ -115,7 +115,7 @@ var vectorTileStyling = {
  	    	color: colorArray[w.toString()],
             weight: 0,
 			fillColor: colorArray[w.toString()],
-			fillOpacity: 0.6,
+			fillOpacity: 0.8,
 			fill: true
     	}
         return(rstyle);
@@ -198,3 +198,10 @@ italy  = [46.2312,11.62356]
 map.setView(italy, 9);
 var hash = new L.Hash(map);
 new L.Control.Zoom({ position: 'topright' }).addTo(map);
+//AddLayer
+const Map_AddLayer = {
+    'Land Surface Temperature<br/>18/08/2023': ltsLayer
+};
+
+L.control.opacity(Map_AddLayer, {label: 'regola trasparenza',position: 'topleft'}).addTo(map);
+
