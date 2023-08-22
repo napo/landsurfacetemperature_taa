@@ -200,8 +200,29 @@ var hash = new L.Hash(map);
 new L.Control.Zoom({ position: 'topright' }).addTo(map);
 //AddLayer
 const Map_AddLayer = {
-    'Land Surface Temperature<br/>18/08/2023': ltsLayer
+    'Land Surface Temperature<br/>14/08/2023': ltsLayer
 };
 
 L.control.opacity(Map_AddLayer, {label: 'regola trasparenza',position: 'topleft'}).addTo(map);
+
+
+var legend = L.control({position: 'bottomleft'});
+    legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend');
+    labels = ['<strong>Categories</strong>'],
+    categories = ['Road Surface','Signage','Line Markings','Roadside Hazards','Other'];
+
+    for (var i = 0; i < categories.length; i++) {
+
+            div.innerHTML += 
+            labels.push(
+                '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
+            (categories[i] ? categories[i] : '+'));
+
+        }
+        div.innerHTML = labels.join('<br>');
+    return div;
+    };
+    legend.addTo(map);
 
